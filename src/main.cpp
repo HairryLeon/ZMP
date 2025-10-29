@@ -51,6 +51,13 @@ int main()
 
 	delete cmd;
 
+	LibInterface libRotate;
+	libRotate.LoadLibrary("./libs/libInterp4Rotate.so");
+
+	AbstractInterp4Command *cmd2 = libRotate.CreateCmdInstance();
+	cmd2->PrintSyntax();
+	delete cmd2;
+
   delete pCmd;
 
   dlclose(pLibHnd_Move);
