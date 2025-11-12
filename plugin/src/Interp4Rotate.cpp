@@ -35,8 +35,8 @@ bool Interp4Rotate::ExecCmd(AbstractScene &rScn, const char *sMobObjName, Abstra
 }
 
 extern "C" {
-AbstractInterp4Command* CreateCmd()
-{
-	return new Interp4Rotate;
-}
+	AbstractInterp4Command* CreateCmd()
+	{
+		return new Interp4Rotate;
+	}
 }

@@ -16,12 +16,12 @@ __lines_for_space__:
 __plugin__:
 	cd plugin; make
 
-CPPFLAGS=-Wall -pedantic -std=c++17 -Iinc
+CPPFLAGS=-Wall -pedantic -std=c++17 -Iinc -g
 LDFLAGS=-Wall
 
 
-interp: obj/main.o obj/RunPreprocessor.o obj/LibInterface.o
-	g++ ${LDFLAGS} -o interp obj/main.o obj/RunPreprocessor.o obj/LibInterface.o -ldl
+interp: obj/main.o obj/RunPreprocessor.o obj/LibInterface.o obj/CommandRegistry.o obj/RunProgram.o
+	g++ ${LDFLAGS} -o interp obj/main.o obj/RunPreprocessor.o obj/LibInterface.o obj/CommandRegistry.o obj/RunProgram.o -ldl
 
 obj/main.o: src/main.cpp inc/AbstractInterp4Command.hh inc/AbstractScene.hh inc/AbstractComChannel.hh inc/RunPreprocessor.hh
 	g++ -c ${CPPFLAGS} -o obj/main.o src/main.cpp
@@ -31,6 +31,13 @@ obj/RunPreprocessor.o: src/RunPreprocessor.cpp inc/RunPreprocessor.hh
 
 obj/LibInterface.o: src/LibInterface.cpp inc/LibInterface.hh
 	g++ -c ${CPPFLAGS} -o obj/LibInterface.o src/LibInterface.cpp
+
+obj/CommandRegistry.o: src/CommandRegistry.cpp inc/CommandRegistry.hh inc/LibInterface.hh
+	g++ -c ${CPPFLAGS} -o obj/CommandRegistry.o src/CommandRegistry.cpp
+
+obj/RunProgram.o: src/RunProgram.cpp inc/RunProgram.hh inc/CommandRegistry.hh
+	g++ -c ${CPPFLAGS} -o obj/RunProgram.o src/RunProgram.cpp
+
 
 doc:
 	cd dox; make

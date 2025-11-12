@@ -2,13 +2,14 @@
 #define INTERP4ROTATE_HH
 
 #include "AbstractInterp4Command.hh"
+#include <string>
 
 class Interp4Rotate : public AbstractInterp4Command
 {
 	std::string _ObjName;
 	double _AngSpeed;
 	double _Angle;
-	char _Axis;
+	std::string _Axis;
 
 public:
 	Interp4Rotate();
