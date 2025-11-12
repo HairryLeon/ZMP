@@ -37,6 +37,7 @@ int main()
   pCmd->PrintCmd();
   cout << endl;
 // preprocesor
+	std::cout << "streszczenie.txt: " << std::endl;
 	std::string content = RunPreprocessor("src/scenariusz.txt");
 	std::cout << content << std::endl;
 
@@ -51,6 +52,7 @@ int main()
 
 	delete cmd;
 
+// wtyczka 2
 	LibInterface libRotate;
 	libRotate.LoadLibrary("./libs/libInterp4Rotate.so");
 
