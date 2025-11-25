@@ -19,9 +19,8 @@ __plugin__:
 CPPFLAGS=-Wall -pedantic -std=c++17 -Iinc -g
 LDFLAGS=-Wall
 
-
-interp: obj/main.o obj/RunPreprocessor.o obj/LibInterface.o obj/CommandRegistry.o obj/RunProgram.o
-	g++ ${LDFLAGS} -o interp obj/main.o obj/RunPreprocessor.o obj/LibInterface.o obj/CommandRegistry.o obj/RunProgram.o -ldl
+interp: obj/main.o obj/RunPreprocessor.o obj/LibInterface.o obj/CommandRegistry.o obj/RunProgram.o obj/xmlinterp.o
+	g++ ${LDFLAGS} -o interp obj/main.o obj/RunPreprocessor.o obj/LibInterface.o obj/CommandRegistry.o obj/RunProgram.o obj/xmlinterp.o -ldl -lxerces-c
 
 obj/main.o: src/main.cpp inc/AbstractInterp4Command.hh inc/AbstractScene.hh inc/AbstractComChannel.hh inc/RunPreprocessor.hh
 	g++ -c ${CPPFLAGS} -o obj/main.o src/main.cpp
@@ -37,6 +36,9 @@ obj/CommandRegistry.o: src/CommandRegistry.cpp inc/CommandRegistry.hh inc/LibInt
 
 obj/RunProgram.o: src/RunProgram.cpp inc/RunProgram.hh inc/CommandRegistry.hh
 	g++ -c ${CPPFLAGS} -o obj/RunProgram.o src/RunProgram.cpp
+
+obj/xmlinterp.o: src/xmlinterp.cpp inc/xmlinterp.hh inc/Configuration.hh
+	g++ -c ${CPPFLAGS} -o obj/xmlinterp.o src/xmlinterp.cpp
 
 
 doc:

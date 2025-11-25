@@ -6,7 +6,7 @@ using namespace std;
 
 bool LibInterface::LoadLibrary(const std::string &libPath)
 {
-    dlerror();  // wyczyść ewentualny poprzedni błąd
+    dlerror();
 
     _LibHandler = dlopen(libPath.c_str(), RTLD_LAZY);
     if (!_LibHandler) {

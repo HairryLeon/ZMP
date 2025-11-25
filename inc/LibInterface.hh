@@ -14,11 +14,9 @@ public:
     LibInterface() = default;
     ~LibInterface();
 
-    // Kopiowanie ZABRONIONE (jeden właściciel jednego dlopen handle)
     LibInterface(const LibInterface&) = delete;
     LibInterface& operator=(const LibInterface&) = delete;
 
-    // WŁASNE przenoszenie: przejmij wskaźniki i WYZERUJ źródło
     LibInterface(LibInterface&& other) noexcept
     : _LibHandler(other._LibHandler),
       _pCreateCmd(other._pCreateCmd),
@@ -31,10 +29,8 @@ public:
     LibInterface& operator=(LibInterface&& other) noexcept
     {
         if (this != &other) {
-            // zwolnij aktualny zasób (jeśli jakiś jest)
             if (_LibHandler) {
-                // zamknie to destruktor, ale możemy wyzerować tu, aby zachować prostotę
-                // zostawiamy zwolnienie w destruktorze – wystarczy
+
             }
             _LibHandler = other._LibHandler;
             _pCreateCmd = other._pCreateCmd;
